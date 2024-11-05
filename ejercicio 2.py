@@ -28,15 +28,13 @@ class Grafo:
         print(f"Máximo de episodios compartidos: {episodiosMax} entre {personajes[0]} y {personajes[1]}")
 
     def encontrarMST(self):
-        # Algoritmo de Kruskal para encontrar el MST
         aristas = []
         for nodo1 in self.adyacencias:
             for nodo2, episodios in self.adyacencias[nodo1].items():
-                if (nodo2, nodo1, episodios) not in aristas:  # Evitar duplicados en aristas no dirigidas
+                if (nodo2, nodo1, episodios) not in aristas:  
                     aristas.append((episodios, nodo1, nodo2))
-        aristas.sort()  # Ordenar aristas por peso (cantidad de episodios compartidos)
+        aristas.sort()  
 
-        # Estructuras para Union-Find
         parent = {nodo: nodo for nodo in self.adyacencias}
         rank = {nodo: 0 for nodo in self.adyacencias}
 
