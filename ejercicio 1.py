@@ -28,15 +28,15 @@ class ArbolBinario:
                 self._insertarRecursivo(nodo.derecha, valor, datos)
 
     def buscar(self, valor):
-        return self._buscarRecursivo(self.raiz, valor)
+        return self.buscarRecursivo(self.raiz, valor)
 
-    def _buscarRecursivo(self, nodo, valor):
+    def buscarRecursivo(self, nodo, valor):
         if nodo is None or nodo.valor == valor:
             return nodo
         elif valor < nodo.valor:
-            return self._buscarRecursivo(nodo.izquierda, valor)
+            return self.buscarRecursivo(nodo.izquierda, valor)
         else:
-            return self._buscarRecursivo(nodo.derecha, valor)
+            return self.buscarRecursivo(nodo.derecha, valor)
 
     def buscarPorProximidad(self, prefijo):
         resultados = []

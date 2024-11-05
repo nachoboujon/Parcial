@@ -1,26 +1,26 @@
 class Grafo:
     def __init__(self):
-        self.adyacencias = {}
+        self.adyacencia = {}
 
     def agregarNodo(self, nodo):
-        if nodo not in self.adyacencias:
-            self.adyacencias[nodo] = {}
+        if nodo not in self.adyacencia:
+            self.adyacencia[nodo] = {}
 
     def agregarConexion(self, nodo1, nodo2, episodios):
-        if nodo1 in self.adyacencias and nodo2 in self.adyacencias:
-            self.adyacencias[nodo1][nodo2] = episodios
-            self.adyacencias[nodo2][nodo1] = episodios
+        if nodo1 in self.adyacencia and nodo2 in self.adyacencia:
+            self.adyacencia[nodo1][nodo2] = episodios
+            self.adyacencia[nodo2][nodo1] = episodios
 
     def mostrar(self):
-        for nodo in self.adyacencias:
-            print(f"{nodo}: {self.adyacencias[nodo]}")
+        for nodo in self.adyacencia:
+            print(f"{nodo}: {self.adyacencia[nodo]}")
 
     def episodiosCompartidos(self):
         episodiosMax = 0
         personajes = (None, None)
 
-        for nodo1 in self.adyacencias:
-            for nodo2, episodios in self.adyacencias[nodo1].items():
+        for nodo1 in self.adyacencia:
+            for nodo2, episodios in self.adyacencia[nodo1].items():
                 if episodios > episodiosMax:
                     episodiosMax = episodios
                     personajes = (nodo1, nodo2)
@@ -29,14 +29,14 @@ class Grafo:
 
     def encontrarMST(self):
         aristas = []
-        for nodo1 in self.adyacencias:
-            for nodo2, episodios in self.adyacencias[nodo1].items():
+        for nodo1 in self.adyacencia:
+            for nodo2, episodios in self.adyacencia[nodo1].items():
                 if (nodo2, nodo1, episodios) not in aristas:  
                     aristas.append((episodios, nodo1, nodo2))
         aristas.sort()  
 
-        parent = {nodo: nodo for nodo in self.adyacencias}
-        rank = {nodo: 0 for nodo in self.adyacencias}
+        parent = {nodo: nodo for nodo in self.adyacencia}
+        rank = {nodo: 0 for nodo in self.adyacencia}
 
         def find(nodo):
             if parent[nodo] != nodo:
